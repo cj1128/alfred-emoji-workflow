@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/fate-lovely/go-alfred"
@@ -11,23 +10,36 @@ import (
 )
 
 func main() {
-	keyword := os.Args[1]
-	for _, item := range search(keyword) {
+	var result []*Emoji
+	keyword := strings.TrimSpace(os.Args[1])
+	if keyword == "" {
+		keyword = "face"
+	}
+	result = search(keyword)
+	for _, item := range result {
+		iconPath := fmt.Sprintf("imgs/%s.png", item.imgid)
 		alfred.AddItem(alfred.Item{
-			Title: item.desc,
-			Arg:   codeToString(item.code),
+			Title:    item.name,
+			Subtitle: fmt.Sprintf(`Copy "%s" to clipboard`, item.char),
+			Arg:      item.char,
+			Mods: alfred.Mods{
+				"alt": alfred.Mod{
+					Valid:    true,
+					Arg:      ":" + item.name + ":",
+					Subtitle: fmt.Sprintf(`Copy ":%s:" to clipboard`, item.name),
+				},
+			},
 			Icon: alfred.Icon{
-				Path: fmt.Sprintf("imgs/%s.png", item.code),
+				Path: iconPath,
+			},
+			Text: alfred.Text{
+				Copy:      item.char,
+				Largetype: item.char,
 			},
 		})
 	}
 	json, _ := alfred.JSON()
 	fmt.Print(json)
-}
-
-func codeToString(code string) string {
-	n, _ := strconv.ParseInt(code[2:], 16, 32)
-	return string(n)
 }
 
 func search(keyword string) []*Emoji {

@@ -1,152 +1,94 @@
-// should run this script in parent dir with `make generate-data`
 package main
 
 import (
 	"bytes"
-	"encoding/base64"
+	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"strconv"
 	"strings"
 
-	pb "gopkg.in/cheggaaa/pb.v2"
-
 	"github.com/pkg/errors"
-
-	"github.com/PuerkitoBio/goquery"
 )
 
-const emojiListURL = "http://www.unicode.org/emoji/charts/emoji-list.html"
-
-type ProgressReader struct {
-	reader io.Reader
-	bar    *pb.ProgressBar
+type Emoji struct {
+	Keywords []string `json:"keywords"`
+	Char     string   `json:"char"`
+	Imgid    string   `json:"imgid"`
 }
 
-func (pr *ProgressReader) Read(p []byte) (int, error) {
-	n, err := pr.reader.Read(p)
-	if n > 0 {
-		pr.bar.Add(n)
-	}
-	if err == io.EOF {
-		pr.bar.Finish()
-	}
-	return n, err
-}
+const emojisJSONPath = "tmp/emojilib/emojis.json"
+const outputPath = "emojis.go"
 
 func main() {
-	fmt.Printf("Downloading %s...\n", emojiListURL)
-	buf, err := downloadURL(emojiListURL)
+	emojis, err := parseEmojisJSON()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Parsing...")
-	if err := parseEmoji(buf); err != nil {
+
+	if err := generateEmojisGo(emojis); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("All done 😉 ")
+	fmt.Println("All done. 😉")
 }
 
-func downloadURL(url string) ([]byte, error) {
-	total, err := getContentLenght(url)
-	if err != nil {
-		return nil, errors.Wrap(err, "could not get content length")
-	}
-
-	bar := pb.Simple.Start(total)
-
-	resp, err := http.Get(url)
+func parseEmojisJSON() (map[string]*Emoji, error) {
+	var result map[string]*Emoji
+	buf, err := ioutil.ReadFile(emojisJSONPath)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	pr := &ProgressReader{resp.Body, bar}
-	buf, err := ioutil.ReadAll(pr)
-	if err != nil {
-		return nil, errors.Wrap(err, "could not read buffer")
+	if err := json.Unmarshal(buf, &result); err != nil {
+		return nil, errors.Wrap(err, "could not unmarshal json")
 	}
-	return buf, nil
+	return result, nil
 }
 
-func parseEmoji(buf []byte) error {
+func generateEmojisGo(emojis map[string]*Emoji) error {
 	out := bytes.Buffer{}
 
 	out.WriteString(`package main
 
 type Emoji struct {
+  name string
+  char string
   code string
-  desc string
+  imgid string
   keywords string
 }
 
 var emojis = []*Emoji{
 `)
 
-	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(buf))
-	if err != nil {
-		return errors.Wrap(err, "could not create new goquery document")
-	}
-
-	trs := doc.Find("tr")
-	bar := pb.Simple.Start(trs.Length())
-
-	trs.Each(func(i int, s *goquery.Selection) {
-		defer bar.Increment()
-		code := s.Find(".code").Text()
-		if len(code) == 0 {
-			return
+	for name, e := range emojis {
+		if e.Char == "" {
+			continue
 		}
 
-		// some emoji codes consist of two unicode points
-		// e.g. U+1F476 U+1F3FE
-		// we don't process emojis like this
-		if strings.Index(code, " ") != -1 {
-			return
-		}
-
-		names := s.Find("td.name")
-		desc := names.First().Text()
-		keywords := strings.Split(names.Last().Text(), " | ")
-		imgBase64, _ := s.Find(".andr img").Attr("src")
-		// remove 'data:image/png;base64,' prefix
-		imgBase64 = imgBase64[22:]
-		if err := saveImg(code, imgBase64); err != nil {
-			log.Fatal(err)
-		}
+		code := charToCode(e.Char)
+		keywords := name + "," + strings.Join(e.Keywords, ",")
 
 		line := fmt.Sprintf(
-			"  {%s, %s, %s},\n",
+			"  {%s, %s, %s, %s, %s},\n",
+			strconv.Quote(name),
+			strconv.Quote(e.Char),
 			strconv.Quote(code),
-			strconv.Quote(desc),
-			strconv.Quote(strings.Join(append(keywords, desc), ", ")),
+			strconv.Quote(e.Imgid),
+			strconv.Quote(keywords),
 		)
 		out.WriteString(line)
-	})
+	}
 	out.WriteString("}")
 	if err := writeData(out.Bytes()); err != nil {
-		return errors.Wrap(err, "could not write")
-	}
-	return nil
-}
-
-func saveImg(code, imgBase64 string) error {
-	buf, err := base64.StdEncoding.DecodeString(imgBase64)
-	if err != nil {
-		return errors.Wrap(err, "could not decode base64")
-	}
-	name := fmt.Sprintf("workflow/imgs/%s.png", code)
-	if err := ioutil.WriteFile(name, buf, 0644); err != nil {
-		return errors.Wrap(err, "could not write file")
+		return err
 	}
 	return nil
 }
 
 func writeData(buf []byte) error {
-	f, err := os.Create("data.go")
+	f, err := os.Create(outputPath)
 	if err != nil {
 		return errors.Wrap(err, "could not create data.go")
 	}
@@ -158,19 +100,11 @@ func writeData(buf []byte) error {
 	return nil
 }
 
-func getContentLenght(url string) (int, error) {
-	resp, err := http.Head(url)
-	if err != nil {
-		return 0, err
+func charToCode(char string) string {
+	runes := []rune(char)
+	result := make([]string, len(runes))
+	for i, r := range runes {
+		result[i] = fmt.Sprintf("%U", r)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return 0, fmt.Errorf("bad status code: %d", resp.StatusCode)
-	}
-	str := resp.Header.Get("Content-Length")
-	n, err := strconv.Atoi(str)
-	if err != nil {
-		return 0, fmt.Errorf("could not convert Content-Length to integer: %s", str)
-	}
-	return n, nil
+	return strings.Join(result, " ")
 }

@@ -12,9 +12,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A7878FFF-C75C-4866-9AAA-74F2F9CC847E</string>
+				<string>524A0EF5-B281-4689-AB78-08391F8632D1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6C307C2-B139-4D3C-93A2-BFE3CF29F57E</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -36,7 +46,7 @@
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<false/>
+				<true/>
 				<key>clipboardtext</key>
 				<string>{query}</string>
 				<key>transient</key>
@@ -45,7 +55,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>A7878FFF-C75C-4866-9AAA-74F2F9CC847E</string>
+			<string>524A0EF5-B281-4689-AB78-08391F8632D1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -59,11 +69,11 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>e</string>
+				<string>emo</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -96,26 +106,52 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>C6C307C2-B139-4D3C-93A2-BFE3CF29F57E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Search emojis by keyword 😉</string>
 	<key>uidata</key>
 	<dict>
 		<key>077FB5CA-AE02-4EDD-8F03-7D4FE7A87185</key>
 		<dict>
 			<key>xpos</key>
-			<integer>160</integer>
+			<integer>50</integer>
 			<key>ypos</key>
-			<integer>70</integer>
+			<integer>80</integer>
 		</dict>
-		<key>A7878FFF-C75C-4866-9AAA-74F2F9CC847E</key>
+		<key>524A0EF5-B281-4689-AB78-08391F8632D1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
+			<integer>620</integer>
 			<key>ypos</key>
-			<integer>40</integer>
+			<integer>30</integer>
+		</dict>
+		<key>C6C307C2-B139-4D3C-93A2-BFE3CF29F57E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>630</integer>
+			<key>ypos</key>
+			<integer>160</integer>
 		</dict>
 	</dict>
+	<key>version</key>
+	<string>v1.0.0</string>
 	<key>webaddress</key>
 	<string>cjting.me</string>
 </dict>

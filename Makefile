@@ -4,10 +4,9 @@ install:
 	go install
 .PHONY: install
 
-build:
+bundle:
 	go build -o workflow/emoji
-.PHONY: build
-
-generate-data:
-	go run scripts/generate_data.go
-.PHONY: generate-data
+	upx --brute workflow/emoji
+	cd workflow && zip -r ../tmp/Emoji.alfredworkflow .
+	rm -rf workflow/emoji
+.PHONY: bundle

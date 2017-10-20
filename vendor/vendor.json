@@ -3,35 +3,10 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "LlvQPCCJxa/4kNQDPBM5fZrtAnU=",
-			"path": "github.com/PuerkitoBio/goquery",
-			"revision": "1a71cc719d0d5b9e4f14ae072bef08b576b0bab5",
-			"revisionTime": "2017-10-07T14:12:28Z"
-		},
-		{
-			"checksumSHA1": "2rWSos1D+xqNSGkvEMOG3pntod8=",
-			"path": "github.com/andybalholm/cascadia",
-			"revision": "349dd0209470eabd9514242c688c403c0926d266",
-			"revisionTime": "2016-12-24T14:14:13Z"
-		},
-		{
 			"checksumSHA1": "uN8cDei+f+WO4ESL1MUZHqYis4M=",
 			"path": "github.com/fate-lovely/go-alfred",
 			"revision": "43fbe5dc8aef62fc03f7647e9d9e3c5b72bef451",
 			"revisionTime": "2016-07-18T09:49:00Z"
-		},
-		{
-			"checksumSHA1": "MrqRXuqj5suGXqcRUUwi+YA7PmE=",
-			"origin": "gopkg.in/fatih/color.v1/vendor/github.com/mattn/go-colorable",
-			"path": "github.com/mattn/go-colorable",
-			"revision": "570b54cabe6b8eb0bc2dfce68d964677d63b5260",
-			"revisionTime": "2017-05-23T13:53:55Z"
-		},
-		{
-			"checksumSHA1": "U6lX43KDDlNOn+Z0Yyww+ZzHfFo=",
-			"path": "github.com/mattn/go-isatty",
-			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
-			"revisionTime": "2017-03-22T23:44:13Z"
 		},
 		{
 			"checksumSHA1": "ynJSWoF6v+3zMnh9R0QmmG6iGV8=",
@@ -40,64 +15,10 @@
 			"revisionTime": "2016-10-29T09:36:37Z"
 		},
 		{
-			"checksumSHA1": "/PGQlVbw8jILX3tLQaYAg6bTAFI=",
-			"path": "golang.org/x/net/html",
-			"revision": "1087133bc4af3073e18add999345c6ae75918503",
-			"revisionTime": "2017-10-13T01:45:07Z"
-		},
-		{
-			"checksumSHA1": "iWvOOLdDxvI4AVX6px6/HYBPeaQ=",
-			"path": "golang.org/x/net/html/atom",
-			"revision": "1087133bc4af3073e18add999345c6ae75918503",
-			"revisionTime": "2017-10-13T01:45:07Z"
-		},
-		{
 			"checksumSHA1": "hYXnETii/mg/fUC0gPl0pzKoqnU=",
 			"path": "golang.org/x/sys/unix",
 			"revision": "43eea11bc92608addb41b8a406b0407495c106f6",
 			"revisionTime": "2017-10-12T11:34:53Z"
-		},
-		{
-			"checksumSHA1": "mNjeVrigrlMCr1fBAupKSGpYmt4=",
-			"path": "gopkg.in/VividCortex/ewma.v1",
-			"revision": "b24eb346a94c3ba12c1da1e564dbac1b498a77ce",
-			"revisionTime": "2017-07-27T16:30:23Z"
-		},
-		{
-			"checksumSHA1": "eu+QqN9OZ4QWJLt4Um3RGZPkOk4=",
-			"path": "gopkg.in/cheggaaa/pb.v2",
-			"revision": "fec330ed6ef74d0a026da2c639821ee0d9f97687",
-			"revisionTime": "2017-10-17T13:13:25Z"
-		},
-		{
-			"checksumSHA1": "EM9DuX6/xQV0joacTAei6zbVl5c=",
-			"path": "gopkg.in/cheggaaa/pb.v2/termutil",
-			"revision": "fec330ed6ef74d0a026da2c639821ee0d9f97687",
-			"revisionTime": "2017-10-17T13:13:25Z"
-		},
-		{
-			"checksumSHA1": "qJJMkzzZXyvtTeCVBBY8SkW5/3E=",
-			"path": "gopkg.in/fatih/color.v1",
-			"revision": "570b54cabe6b8eb0bc2dfce68d964677d63b5260",
-			"revisionTime": "2017-05-23T13:53:55Z"
-		},
-		{
-			"checksumSHA1": "YJdvzHP/aPva2cWlRHoEzm2aDWM=",
-			"path": "gopkg.in/mattn/go-colorable.v0",
-			"revision": "167de6bfdfba052fa6b2d3664c8f5272e23c9072",
-			"revisionTime": "2017-08-01T03:06:07Z"
-		},
-		{
-			"checksumSHA1": "1K5P2qoyKnAU64qb3oLH1LF0G0s=",
-			"path": "gopkg.in/mattn/go-isatty.v0",
-			"revision": "0360b2af4f38e8d38c7fce2a9f4e702702d73a39",
-			"revisionTime": "2017-09-25T05:34:41Z"
-		},
-		{
-			"checksumSHA1": "0O2q0fOUYdMlYiz4y9MH4l6TpCE=",
-			"path": "gopkg.in/mattn/go-runewidth.v0",
-			"revision": "9e777a8366cce605130a531d2cd6363d07ad7317",
-			"revisionTime": "2017-02-01T02:26:20Z"
 		}
 	],
 	"rootPath": "github.com/fate-lovely/alfred-emoji-workflow"
