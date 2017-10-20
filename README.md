@@ -10,7 +10,7 @@ Alfred workflow to quick search emojis, after all, every one loves emoji 😎
 
 ## Installation 😆
 
-click to download latest version of [Emoji.alfredworkflow](https://github.com/fate-lovely/alfred-emoji-workflow/releases/download/v1.0.0/Emoji.alfredworkflow).
+click to download latest version of [Emoji.alfredworkflow](https://github.com/fate-lovely/alfred-emoji-workflow/releases/download/v1.1.0/Emoji.alfredworkflow).
 
 ## Usage 🌟
 
