@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/fate-lovely/go-alfred"
@@ -15,7 +16,13 @@ func main() {
 	if keyword == "" {
 		keyword = "face"
 	}
+
 	result = search(keyword)
+
+	sort.SliceStable(result, func(i, j int) bool {
+		return getScore(keyword, result[i]) > getScore(keyword, result[j])
+	})
+
 	for _, item := range result {
 		iconPath := fmt.Sprintf("imgs/%s.png", item.imgid)
 		alfred.AddItem(alfred.Item{
@@ -50,4 +57,20 @@ func search(keyword string) []*Emoji {
 		}
 	}
 	return result
+}
+
+func getScore(keyword string, emoji *Emoji) int {
+	if keyword == emoji.name {
+		return 3
+	}
+
+	i := strings.Index(emoji.name, keyword)
+	if i == 0 {
+		return 2
+	}
+	if i > 0 {
+		return 1
+	}
+
+	return 0
 }

@@ -73,7 +73,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>emo</string>
+				<string>et</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -151,7 +151,7 @@
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>v1.0.0</string>
+	<string>v1.1.0</string>
 	<key>webaddress</key>
 	<string>cjting.me</string>
 </dict>
