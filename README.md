@@ -4,7 +4,9 @@
 
 Alfred workflow to quick search emojis, after all, every one loves emoji 😎
 
-![](http://ww1.sinaimg.cn/large/9b85365dgy1fkop53mmddg20dc0a7hdw)
+<p align="center">
+  <img src="http://ww1.sinaimg.cn/large/9b85365dgy1fkop53mmddg20dc0a7hdw" />
+</p>
 
 ## Installation 😆
 
@@ -13,7 +15,7 @@ click to download latest version [Emoji.alfredworkflow](https://github.com/fate-
 ## Usage 🌟
 
 - press `Enter` to copy emoji, e.g. 😎
-- press `Alt+Enter` to copy text representation, e.g. :sunglasses:
+- press `Alt+Enter` to copy text representation, e.g. `:sunglasses:`
 
 ## Development
 
