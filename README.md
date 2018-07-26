@@ -5,7 +5,7 @@
 Alfred workflow to quick search emojis, after all, every one loves emoji 😎.
 
 <p align="center">
-  <img src="http://ww1.sinaimg.cn/large/9b85365dgy1ftn25whdrqj20mg0fcn8d" />
+  <img src="http://ww1.sinaimg.cn/large/9b85365dgy1ftn2byughhg20mg0fc7wj" />
 </p>
 
 ## Installation 😆
