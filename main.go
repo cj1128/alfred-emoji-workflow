@@ -30,6 +30,7 @@ func main() {
 			Title:    emoji.name,
 			Subtitle: fmt.Sprintf(`Copy "%s" to clipboard`, emoji.char),
 			Arg:      emoji.char,
+			Valid:    true,
 			Mods: gofred.Mods{
 				gofred.CmdKey: &gofred.Mod{
 					Valid:    true,

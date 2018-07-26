@@ -22,7 +22,7 @@ type Item struct {
 	Arg          string `json:"arg,omitempty"`
 	Autocomplete string `json:"autocomplete,omitempty"`
 	Icon         *Icon  `json:"icon,omitempty"`
-	Valid        bool   `json:"valid,omitempty"`
+	Valid        bool   `json:"valid"`
 	Match        string `json:"match,omitempty"`
 	Quicklookurl string `json:"quicklookurl,omitempty"`
 	Mods         Mods   `json:"mods,omitempty"`

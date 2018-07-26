@@ -1,8 +1,8 @@
 # Gofred
 
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://mit-license.org/2016)
-[![Build Status](https://travis-ci.org/fate-lovely/go-alfred.svg?branch=master)](https://travis-ci.org/fate-lovely/go-alfred)
-[![Go Doc](https://godoc.org/github.com/fate-lovely/go-alfred?status.svg)](https://godoc.org/github.com/fate-lovely/go-alfred)
+[![Build Status](https://travis-ci.org/fate-lovely/gofred.svg?branch=master)](https://travis-ci.org/fate-lovely/gofred)
+[![Go Doc](https://godoc.org/github.com/fate-lovely/gofred?status.svg)](https://godoc.org/github.com/fate-lovely/gofred)
 
 A golang library for writing alfred workflow.
 
@@ -12,64 +12,74 @@ A golang library for writing alfred workflow.
 go get github.com/fate-lovely/gofred
 ```
 
-## Usage
+## Doc
 
-Read the [doc](https://godoc.org/github.com/fate-lovely/gofred).
+[Go Doc].
 
-### Add items and get JSON / XML response strings
+### Example
+
+**make sure to set `Valid` attribute of `Item` and `Mod`, its default value is `false`**.
 
 ```go
-import "github.com/fate-lovely/go-alfred"
+package main
+
+import (
+    "fmt"
+
+    "github.com/fate-lovely/gofred"
+)
 
 func main() {
-  item := alfred.Item{
-    Title:    "this is title",
-    Subtitle: "This is subtitle",
-    Arg:      "this is arg",
-    Icon: alfred.Icon{
-      Type: "filetype",
-      Path: "public.png",
-    },
-  }
-  alfred.AddItem(item)
+    gofred.AddItem(&gofred.Item{
+        Title:    "titl1",
+        Subtitle: "subtitle1",
+        Arg:      "arg1",
+        Valid:    true,
+        Icon: &gofred.Icon{
+            Type: "filetype",
+            Path: "public.png",
+        },
+    })
 
-  item.Title = "this is title2"
-  item.Subtitle = "this is subtitle2"
-  item.Arg = "this is arg2"
-  item.Icon.Path = "icon.png"
+    gofred.AddItem(&gofred.Item{
+        Title:    "title2",
+        Subtitle: "subtitle2",
+        Arg:      "arg2",
+        Valid:    true,
+    })
 
-  alfred.AddItem(item)
-
-  jsonStr, err := alfred.JSON()
-  // xmlStr, err := res.XML()
+    json, _ := gofred.JSON()
+    fmt.Println(json)
 }
+// {
+//   "items": [
+//     {
+//       "title": "titl1",
+//       "subtitle": "subtitle1",
+//       "arg": "arg1",
+//       "icon": {
+//         "type": "filetype",
+//         "path": "public.png"
+//       },
+//       "valid": true
+//     },
+//     {
+//       "title": "title2",
+//       "subtitle": "subtitle2",
+//       "arg": "arg2",
+//       "valid": true
+//     }
+//   ]
+// }
 ```
 
-### Use Response struct
-```go
-import "github.com/fate-lovely/go-alfred"
+## Reference
 
-func main() {
-  res := alfred.Response{}
-  item := alfred.Item{
-    Title:    "this is title",
-    Subtitle: "This is subtitle",
-    Icon: alfred.Icon{
-      Type: "file",
-      Path: "public.png",
-    },
-  }
-  res.AddItem(item)
-  jsonStr, err := res.JSON()
-  // xmlStr, err := res.XML()
-}
-```
-
-## 
-
-- https://www.alfredapp.com/help/workflows/inputs/script-filter/json/
+- [Alfred JSON Response]
 
 ## License
 
 Released under the [MIT license](http://mit-license.org/2016).
 
+[Go Doc]: https://godoc.org/github.com/fate-lovely/gofred
+[Alfred JSON Response]: https://www.alfredapp.com/help/workflows/inputs/script-filter/json/

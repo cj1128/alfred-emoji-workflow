@@ -1,9 +1,5 @@
 SHELL := /bin/bash
 
-install:
-	go install
-.PHONY: install
-
 build:
 	go build -o workflow/emoji
 

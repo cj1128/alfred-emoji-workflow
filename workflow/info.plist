@@ -20,16 +20,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C6C307C2-B139-4D3C-93A2-BFE3CF29F57E</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -42,23 +32,6 @@
 	<string>Emoji</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>524A0EF5-B281-4689-AB78-08391F8632D1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -119,7 +92,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>C6C307C2-B139-4D3C-93A2-BFE3CF29F57E</string>
+			<string>524A0EF5-B281-4689-AB78-08391F8632D1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -131,28 +104,21 @@
 		<key>077FB5CA-AE02-4EDD-8F03-7D4FE7A87185</key>
 		<dict>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>150</integer>
 			<key>ypos</key>
-			<integer>80</integer>
+			<integer>70</integer>
 		</dict>
 		<key>524A0EF5-B281-4689-AB78-08391F8632D1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>620</integer>
+			<integer>590</integer>
 			<key>ypos</key>
-			<integer>30</integer>
-		</dict>
-		<key>C6C307C2-B139-4D3C-93A2-BFE3CF29F57E</key>
-		<dict>
-			<key>xpos</key>
-			<integer>630</integer>
-			<key>ypos</key>
-			<integer>160</integer>
+			<integer>70</integer>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>v1.1.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
-	<string>cjting.me</string>
+	<string>https://github.com/fate-lovely/alfred-emoji-workflow</string>
 </dict>
 </plist>
