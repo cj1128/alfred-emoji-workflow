@@ -1,3 +1,4 @@
+// generate emoji data for golang using `emojiimages` library
 package main
 
 import (
@@ -14,12 +15,13 @@ import (
 )
 
 type Emoji struct {
-	Keywords []string `json:"keywords"`
+	Name     string   `json:"name"`
 	Char     string   `json:"char"`
-	Imgid    string   `json:"imgid"`
+	Keywords []string `json:"keywords"`
+	Img      string   `json:"img"`
 }
 
-const emojisJSONPath = "tmp/emojilib/emojis.json"
+const emojisJSONPath = "tmp/node_modules/emojiimages/emojis.json"
 const outputPath = "emojis.go"
 
 func main() {
@@ -34,8 +36,8 @@ func main() {
 	fmt.Println("All done. 😉")
 }
 
-func parseEmojisJSON() (map[string]*Emoji, error) {
-	var result map[string]*Emoji
+func parseEmojisJSON() ([]*Emoji, error) {
+	var result []*Emoji
 	buf, err := ioutil.ReadFile(emojisJSONPath)
 	if err != nil {
 		return nil, err
@@ -46,7 +48,7 @@ func parseEmojisJSON() (map[string]*Emoji, error) {
 	return result, nil
 }
 
-func generateEmojisGo(emojis map[string]*Emoji) error {
+func generateEmojisGo(emojis []*Emoji) error {
 	out := bytes.Buffer{}
 
 	out.WriteString(`package main
@@ -54,28 +56,21 @@ func generateEmojisGo(emojis map[string]*Emoji) error {
 type Emoji struct {
   name string
   char string
-  code string
-  imgid string
+  img string
   keywords string
 }
 
 var emojis = []*Emoji{
 `)
 
-	for name, e := range emojis {
-		if e.Char == "" {
-			continue
-		}
-
-		code := charToCode(e.Char)
-		keywords := name + "," + strings.Join(e.Keywords, ",")
+	for _, emoji := range emojis {
+		keywords := emoji.Name + "," + strings.Join(emoji.Keywords, ",")
 
 		line := fmt.Sprintf(
-			"  {%s, %s, %s, %s, %s},\n",
-			strconv.Quote(name),
-			strconv.Quote(e.Char),
-			strconv.Quote(code),
-			strconv.Quote(e.Imgid),
+			"  {%s, %s, %s, %s},\n",
+			strconv.Quote(emoji.Name),
+			strconv.Quote(emoji.Char),
+			strconv.Quote(emoji.Img),
 			strconv.Quote(keywords),
 		)
 		out.WriteString(line)

@@ -3,22 +3,16 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "uN8cDei+f+WO4ESL1MUZHqYis4M=",
-			"path": "github.com/fate-lovely/go-alfred",
-			"revision": "43fbe5dc8aef62fc03f7647e9d9e3c5b72bef451",
-			"revisionTime": "2016-07-18T09:49:00Z"
+			"checksumSHA1": "39Il+coMooc19kFu0isjpDpz4yY=",
+			"path": "github.com/fate-lovely/gofred",
+			"revision": "a3cb0f2bae3caee62b53f692c3e3223135e0918f",
+			"revisionTime": "2018-07-26T02:34:52Z"
 		},
 		{
-			"checksumSHA1": "ynJSWoF6v+3zMnh9R0QmmG6iGV8=",
+			"checksumSHA1": "ljd3FhYRJ91cLZz3wsH9BQQ2JbA=",
 			"path": "github.com/pkg/errors",
-			"revision": "248dadf4e9068a0b3e79f02ed0a610d935de5302",
-			"revisionTime": "2016-10-29T09:36:37Z"
-		},
-		{
-			"checksumSHA1": "hYXnETii/mg/fUC0gPl0pzKoqnU=",
-			"path": "golang.org/x/sys/unix",
-			"revision": "43eea11bc92608addb41b8a406b0407495c106f6",
-			"revisionTime": "2017-10-12T11:34:53Z"
+			"revision": "816c9085562cd7ee03e7f8188a1cfd942858cded",
+			"revisionTime": "2018-03-11T21:45:15Z"
 		}
 	],
 	"rootPath": "github.com/fate-lovely/alfred-emoji-workflow"

@@ -5,55 +5,57 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/fate-lovely/go-alfred"
-
 	"os"
+
+	"github.com/fate-lovely/gofred"
 )
 
 func main() {
-	var result []*Emoji
 	keyword := strings.TrimSpace(os.Args[1])
+
 	if keyword == "" {
 		keyword = "face"
 	}
 
-	result = search(keyword)
+	result := search(keyword)
 
 	sort.SliceStable(result, func(i, j int) bool {
 		return getScore(keyword, result[i]) > getScore(keyword, result[j])
 	})
 
-	for _, item := range result {
-		iconPath := fmt.Sprintf("imgs/%s.png", item.imgid)
-		alfred.AddItem(alfred.Item{
-			Title:    item.name,
-			Subtitle: fmt.Sprintf(`Copy "%s" to clipboard`, item.char),
-			Arg:      item.char,
-			Mods: alfred.Mods{
-				"alt": alfred.Mod{
+	for _, emoji := range result {
+		iconPath := fmt.Sprintf("imgs/%s", emoji.img)
+
+		gofred.AddItem(&gofred.Item{
+			Title:    emoji.name,
+			Subtitle: fmt.Sprintf(`Copy "%s" to clipboard`, emoji.char),
+			Arg:      emoji.char,
+			Mods: gofred.Mods{
+				gofred.CmdKey: &gofred.Mod{
 					Valid:    true,
-					Arg:      ":" + item.name + ":",
-					Subtitle: fmt.Sprintf(`Copy ":%s:" to clipboard`, item.name),
+					Arg:      ":" + emoji.name + ":",
+					Subtitle: fmt.Sprintf(`Copy ":%s:" to clipboard`, emoji.name),
 				},
 			},
-			Icon: alfred.Icon{
+			Icon: &gofred.Icon{
 				Path: iconPath,
 			},
-			Text: alfred.Text{
-				Copy:      item.char,
-				Largetype: item.char,
+			Text: &gofred.Text{
+				Copy:      emoji.char,
+				Largetype: emoji.char,
 			},
 		})
 	}
-	json, _ := alfred.JSON()
+
+	json, _ := gofred.JSON()
 	fmt.Print(json)
 }
 
 func search(keyword string) []*Emoji {
 	var result []*Emoji
-	for _, item := range emojis {
-		if strings.Index(item.keywords, keyword) != -1 {
-			result = append(result, item)
+	for _, emoji := range emojis {
+		if strings.Index(emoji.keywords, keyword) != -1 {
+			result = append(result, emoji)
 		}
 	}
 	return result
