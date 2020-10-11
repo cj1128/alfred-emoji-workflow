@@ -1,4 +1,4 @@
 .DS_Store
-tmp/*
 workflow/emoji
 node_modules
+Emoji.alfredworkflow

@@ -6,5 +6,5 @@ build:
 
 bundle: build
 	upx --brute workflow/emoji
-	cd workflow && zip -r ../tmp/Emoji.alfredworkflow .
+	cd workflow && zip -r ../Emoji.alfredworkflow .
 .PHONY: bundle
