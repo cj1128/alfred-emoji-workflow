@@ -1,4 +1,4 @@
 .DS_Store
 tmp/*
-!tmp/.gitkeep
 workflow/emoji
+node_modules

@@ -20,10 +20,20 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>98C50FBE-7BFB-4E7F-86B2-D9678F46D0BA</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>modifier subtext</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>CJ Ting &lt;fatelovely1128@gmail.com&gt;</string>
+	<string>CJ Ting &lt;cjting1128@gmail.com&gt;</string>
 	<key>description</key>
 	<string>Search emoji</string>
 	<key>disabled</key>
@@ -96,6 +106,21 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>98C50FBE-7BFB-4E7F-86B2-D9678F46D0BA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Search emojis by keyword 😉</string>
@@ -115,10 +140,17 @@
 			<key>ypos</key>
 			<integer>70</integer>
 		</dict>
+		<key>98C50FBE-7BFB-4E7F-86B2-D9678F46D0BA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>590</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
 	</dict>
 	<key>version</key>
-	<string>1.1.0</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
-	<string>https://github.com/fate-lovely/alfred-emoji-workflow</string>
+	<string>https://github.com/cj1128/alfred-emoji-workflow</string>
 </dict>
 </plist>

@@ -1,0 +1,12 @@
+{
+  "name": "alfred-emoji-workflow",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "git@github.com:cj1128/alfred-emoji-workflow.git",
+  "author": "CJ Ting <cjting1128@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "emojiimages": "1.2.1",
+    "emojilib": "2.4.0"
+  }
+}

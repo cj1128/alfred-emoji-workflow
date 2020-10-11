@@ -7,24 +7,26 @@ import (
 
 	"os"
 
-	"github.com/fate-lovely/gofred"
+	"github.com/cj1128/gofred"
 )
 
 func main() {
-	keyword := strings.TrimSpace(os.Args[1])
+	searchText := strings.TrimSpace(os.Args[1])
 
-	if keyword == "" {
-		keyword = "face"
+	if searchText == "" {
+		searchText = "face"
 	}
 
-	result := search(keyword)
+	terms := strings.Fields(searchText)
+
+	result := search(terms)
 
 	sort.SliceStable(result, func(i, j int) bool {
-		return getScore(keyword, result[i]) > getScore(keyword, result[j])
+		return getScore(terms, result[i]) > getScore(terms, result[j])
 	})
 
 	for _, emoji := range result {
-		iconPath := fmt.Sprintf("imgs/%s", emoji.img)
+		iconPath := fmt.Sprintf("%s", emoji.img)
 
 		gofred.AddItem(&gofred.Item{
 			Title:    emoji.name,
@@ -32,10 +34,15 @@ func main() {
 			Arg:      emoji.char,
 			Valid:    true,
 			Mods: gofred.Mods{
-				gofred.CmdKey: &gofred.Mod{
+				gofred.CtrlKey: &gofred.Mod{
 					Valid:    true,
 					Arg:      ":" + emoji.name + ":",
 					Subtitle: fmt.Sprintf(`Copy ":%s:" to clipboard`, emoji.name),
+				},
+				gofred.CmdKey: &gofred.Mod{
+					Valid:    true,
+					Arg:      emoji.img,
+					Subtitle: "Open emoji image",
 				},
 			},
 			Icon: &gofred.Icon{
@@ -52,28 +59,47 @@ func main() {
 	fmt.Print(json)
 }
 
-func search(keyword string) []*Emoji {
+func search(terms []string) []*Emoji {
 	var result []*Emoji
+
+outer:
 	for _, emoji := range emojis {
-		if strings.Index(emoji.keywords, keyword) != -1 {
-			result = append(result, emoji)
+		for _, term := range terms {
+			if strings.Index(emoji.keywords, term) == -1 {
+				continue outer
+			}
 		}
+
+		result = append(result, emoji)
 	}
+
 	return result
 }
 
-func getScore(keyword string, emoji *Emoji) int {
-	if keyword == emoji.name {
-		return 3
+func getScoreForTerm(term string, emoji *Emoji) int {
+	if term == emoji.name {
+		return 4
 	}
 
-	i := strings.Index(emoji.name, keyword)
+	i := strings.Index(emoji.name, term)
+
 	if i == 0 {
 		return 2
 	}
+
 	if i > 0 {
 		return 1
 	}
 
 	return 0
+}
+
+func getScore(terms []string, emoji *Emoji) int {
+	result := 0
+
+	for _, term := range terms {
+		result += getScoreForTerm(term, emoji)
+	}
+
+	return result
 }
